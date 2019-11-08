@@ -32,4 +32,16 @@ public class GameDraw {
         tank.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile291.png");
         return tank;
     }
+
+    public static Tower drawTower()
+    {
+        Tower tower = new Tower();
+        tower.x = 4 * Config.TILE_SIZE;
+        tower.y = 2 * Config.TILE_SIZE;
+        tower.radiusScope = 192;
+        tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
+        tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
+        tower.setDirection(270);
+        return tower;
+    }
 }
