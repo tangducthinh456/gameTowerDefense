@@ -26,13 +26,15 @@ public class Tower extends GameEntity{
             ImageView iv = new ImageView(bulletImg);
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
-            params.setTransform(new Rotate(listBullet.get(0).direction, Config.TILE_SIZE / 2, Config.TILE_SIZE / 2));
+            params.setTransform(new Rotate(listBullet.get(0).bulletDirection, Config.TILE_SIZE / 2, Config.TILE_SIZE / 2));
             //ImageView iv = new ImageView(gunImg);
             params.setViewport(new Rectangle2D(0, 0, Config.TILE_SIZE, Config.TILE_SIZE));
 
             Image base = iv.snapshot(params, null);
             gc.drawImage(base, listBullet.get(0).x, listBullet.get(0).y);
         }
+
+
 
         ImageView iv = new ImageView(gunImg);
         SnapshotParameters params = new SnapshotParameters();
@@ -52,45 +54,47 @@ public class Tower extends GameEntity{
     {
         if (Point.distance(x, y, enemy.x, enemy.y) < radiusScope)
         {
-            int dx = x - enemy.x;
-            int dy = y - enemy.y;
+            double dx = x - enemy.x;
+            double dy = y - enemy.y;
             if (dx == 0) dx++;
             if (dy == 0) dy++;
 
-            if(dx > 0 && dy < 0)
+            if (dx > 0 && dy < 0)
             {
                 this.setDirection(180 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-                listBullet.get(0).x -= Math.cos(Math.abs(listBullet.get(0).speed));
-                listBullet.get(0).y += Math.sin(Math.abs(listBullet.get(0).speed));
             }
-            else if(dx > 0 && dy > 0)
+            else if (dx > 0 && dy > 0)
             {
                 this.setDirection(270 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-                listBullet.get(0).x -= Math.cos(Math.abs(listBullet.get(0).speed));
-                listBullet.get(0).y -= Math.sin(Math.abs(listBullet.get(0).speed));
+
             }
-            else if(dx < 0 && dy > 0)
+            else if (dx < 0 && dy > 0)
             {
                 this.setDirection(0 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-                listBullet.get(0).x += Math.cos(Math.abs(listBullet.get(0).speed));
-                listBullet.get(0).y -= Math.sin(Math.abs(listBullet.get(0).speed));
             }
-            else if(dx < 0 && dy < 0)
+            else if (dx < 0 && dy < 0)
             {
                 this.setDirection(90 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-                listBullet.get(0).x += Math.cos(Math.abs(listBullet.get(0).speed));
-                listBullet.get(0).y += Math.sin(Math.abs(listBullet.get(0).speed));
             }
-
-            if(listBullet.isEmpty()) listBullet.add( new Bullet(10, 7, 1, x, y, this.getDirection()));
-
+            if (listBullet.isEmpty())
+            {
+                listBullet.add( new Bullet(10, 30, 1, x, y, this.getDirection()));
+                //double a= listBullet.get(0).direction
+            }
+        }
+        if (!listBullet.isEmpty())
+        {
+            listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
+            double m = Math.sin(listBullet.get(0).bulletDirection);
+            listBullet.get(0).y -= Math.cos(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
+            double n = Math.cos(listBullet.get(0).bulletDirection);
+            if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT || listBullet.get(0).isCollision(enemy)) listBullet.remove(listBullet.get(0));
         }
     }
-
     @Override
     void update()
     {
-        calculateDirection(GameField.entities.get(0));
+        calculateDirection(GameField.entities.get(1));
     }
 }
 

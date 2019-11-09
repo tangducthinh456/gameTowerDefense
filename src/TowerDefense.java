@@ -47,9 +47,10 @@ public class TowerDefense extends Application
         };
         timer.start();
 
-        enemy.add(GameDraw.drawTank());
+
 
         enemy.add(GameDraw.drawPlane());
+        enemy.add(GameDraw.drawTank());
         enemy.add(GameDraw.drawTower());
     }
 

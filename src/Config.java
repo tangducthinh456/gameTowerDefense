@@ -24,6 +24,7 @@ public final class Config
          * in other words, the texture will be display as it without scaling.
          */
         public static final int TILE_HORIZONTAL = 24;
+        public static final int TILE_GAMEFIELD = 19;
         /**
          * Num of tiles the screen can display if fieldZoom is TILE_SIZE,
          * in other words, the texture will be display as it without scaling.
@@ -40,6 +41,9 @@ public final class Config
          * Size of the screen.
          */
         public static final int SCREEN_WIDTH = TILE_SIZE * TILE_HORIZONTAL;
+
+        public static final int GAMEFIELD_WIDTH = TILE_SIZE * TILE_GAMEFIELD;
+
         /**
          * Size of the screen.
          */

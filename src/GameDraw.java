@@ -8,7 +8,7 @@ public class GameDraw {
         plane.j = 10;
         plane.x = plane.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         plane.y = plane.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        plane.speed = 10;
+        plane.speed = 7;
         plane.reward = 10;
         plane.damage = 5;
         plane.health = 10;
@@ -36,12 +36,13 @@ public class GameDraw {
     public static Tower drawTower()
     {
         Tower tower = new Tower();
-        tower.x = 4 * Config.TILE_SIZE;
-        tower.y = 2 * Config.TILE_SIZE;
+        tower.x = 5 * Config.TILE_SIZE;
+        tower.y = 3 * Config.TILE_SIZE;
         tower.radiusScope = 192;
         tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
         tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
-        tower.setDirection(270);
+        tower.setDirection(100);
+        tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
         return tower;
     }
 }
