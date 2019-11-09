@@ -1,3 +1,4 @@
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
@@ -5,9 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+import org.w3c.dom.ls.LSOutput;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Tower extends GameEntity{
 
@@ -15,6 +16,9 @@ public class Tower extends GameEntity{
     double radiusScope;
     Image gunImg;
     Image bulletImg;
+    public  int damage;
+    String type;
+    Queue<Enemy> enemyInScope = new LinkedList<>();
     List<Bullet> listBullet = new ArrayList<>();
 
     @Override
@@ -50,7 +54,7 @@ public class Tower extends GameEntity{
 
     }
 
-    void calculateDirection(GameEntity enemy)
+    void calculateDirection(Enemy enemy)
     {
         if (Point.distance(x, y, enemy.x, enemy.y) < radiusScope)
         {
@@ -78,23 +82,48 @@ public class Tower extends GameEntity{
             }
             if (listBullet.isEmpty())
             {
-                listBullet.add( new Bullet(10, 30, 1, x, y, this.getDirection()));
+                listBullet.add( new Bullet(10, 30, x, y, this.getDirection()));
                 //double a= listBullet.get(0).direction
             }
         }
         if (!listBullet.isEmpty())
         {
             listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-            double m = Math.sin(listBullet.get(0).bulletDirection);
+
             listBullet.get(0).y -= Math.cos(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-            double n = Math.cos(listBullet.get(0).bulletDirection);
-            if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT || listBullet.get(0).isCollision(enemy)) listBullet.remove(listBullet.get(0));
+
+            if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT || listBullet.get(0).isCollision(enemy)) listBullet.remove(0);
+            //if (enemyInScope.isEmpty()) listBullet.remove(0);
         }
     }
     @Override
     void update()
     {
-        calculateDirection(GameField.entities.get(1));
+        for(Enemy enemy : GameField.enemyList)
+        {
+            double m = Point.distance(enemy.x, enemy.y, x, y);
+            if (Point.distance(enemy.x, enemy.y, x, y) <= radiusScope)
+            {
+                if(!enemyInScope.contains(enemy)) enemyInScope.add(enemy);
+                //else if (enemyInScope.contains(enemy)) enemyInScope.add(enemy);
+            }
+            else if (!enemyInScope.isEmpty())
+            {
+                if (enemy == enemyInScope.peek())
+                {
+                    Object firstElement = enemyInScope.remove();
+                }
+            }
+        }
+        if(!enemyInScope.isEmpty()) calculateDirection(enemyInScope.peek());
+        else if (!listBullet.isEmpty())
+        {
+            listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
+
+            listBullet.get(0).y -= Math.cos(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
+
+            if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT) listBullet.remove(0);
+        }
     }
 }
 

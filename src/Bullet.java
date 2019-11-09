@@ -13,14 +13,12 @@ public class Bullet extends GameEntity
 {
     public  int damage;
     public  int speed;
-    public int type;
     public final double bulletDirection;
 
-    public Bullet(int damage, int speed, int type, double x, double y, double bulletDirection)
+    public Bullet(int damage, int speed, double x, double y, double bulletDirection)
     {
         this.damage = damage;
         this.speed = speed;
-        this.type = type;
         this.x = x;
         this.y = y;
         this.bulletDirection = bulletDirection;
@@ -28,7 +26,7 @@ public class Bullet extends GameEntity
 
     public Bullet drawBullet(int damage, int speed, int type, double x, double y, double bulletDirection)
     {
-        Bullet bullet = new Bullet(damage, speed, type, x, y, bulletDirection);
+        Bullet bullet = new Bullet(damage, speed, x, y, bulletDirection);
         return bullet;
     }
 

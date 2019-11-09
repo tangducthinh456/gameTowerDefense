@@ -12,7 +12,7 @@ public class GameController extends AnimationTimer {
     }
 
     public void update() {
-        gameField.entities.forEach(GameEntity::update);
+        //gameField..forEach(GameEntity::update);
     }
     public void render()
     {

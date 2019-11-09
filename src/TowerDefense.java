@@ -18,7 +18,7 @@ public class TowerDefense extends Application
 {
 
     GraphicsContext gc;
-    List<GameEntity> enemy = GameField.entities;
+    //List<Enemy> enemy = GameField.enemyList;
     GameField gamefield;
 
     @Override
@@ -47,21 +47,26 @@ public class TowerDefense extends Application
         };
         timer.start();
 
+        GameField.enemyList.add(GameDraw.drawPlane());
+        GameField.enemyList.add(GameDraw.drawTank());
+        GameField.towerList.add(GameDraw.drawTower(4, 2, "NormalTower"));
+        GameField.towerList.add(GameDraw.drawTower(15, 9, "SnipperTower"));
+        GameField.towerList.add(GameDraw.drawTower(2, 6, "MachineGunTower"));
+        GameField.towerList.add(GameDraw.drawTower(2, 9, "NormalTower"));
 
-
-        enemy.add(GameDraw.drawPlane());
-        enemy.add(GameDraw.drawTank());
-        enemy.add(GameDraw.drawTower());
     }
 
-    public void update() {
-        enemy.forEach(GameEntity::update);
+    public void update()
+    {
+        GameField.enemyList.forEach(GameEntity::update);
+        GameField.towerList.forEach(Tower::update);
     }
 
     public void render()
     {
         GameField.drawMap(gc);
-        enemy.forEach(g -> g.render(gc));
+        GameField.enemyList.forEach(g -> g.render(gc));
+        GameField.towerList.forEach(g->g.render(gc));
     }
 
 }
