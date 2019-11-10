@@ -8,7 +8,7 @@ public class GameDraw {
         plane.j = 10;
         plane.x = plane.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         plane.y = plane.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        plane.speed = 10;
+        plane.speed = 7;
         plane.reward = 10;
         plane.damage = 5;
         plane.health = 10;
@@ -33,37 +33,16 @@ public class GameDraw {
         return tank;
     }
 
-    public static Tower drawTower(int m, int n, String type)
+    public static Tower drawTower()
     {
         Tower tower = new Tower();
-        tower.x = m * Config.TILE_SIZE;
-        tower.y = n * Config.TILE_SIZE;
-        tower.setDirection(0);
-        if (type.equals("NormalTower"))
-        {
-            tower.radiusScope = 192;
-            tower.damage = 4;
-            tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
-            tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
-            tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
-        }
-        else if (type.equals("SnipperTower"))
-        {
-            tower.damage = 6;
-            tower.radiusScope = 200;
-            tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
-            tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png");
-            tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile252.png");
-        }
-        else if (type.equals("MachineGunTower"))
-        {
-            tower.radiusScope = 130;
-            tower.damage = 2;
-            tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
-            tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
-            tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile272.png");
-        }
-
+        tower.x = 5 * Config.TILE_SIZE;
+        tower.y = 3 * Config.TILE_SIZE;
+        tower.radiusScope = 192;
+        tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
+        tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
+        tower.setDirection(100);
+        tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
         return tower;
     }
 }
