@@ -8,6 +8,7 @@ public class GameField
 {
     static List<Enemy> enemyList = new ArrayList<>();
     static List<Tower> towerList = new ArrayList<>();
+    static final long timeStart = System.currentTimeMillis();
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024" },
