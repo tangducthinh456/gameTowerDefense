@@ -28,12 +28,15 @@ class Plane extends Enemy
 
         gc.drawImage(base, x, y);
 
-
-
         gc.setFill(Color.RED);
         gc.fillOval(GameField.wayPoints[wayPointIndex].x,GameField.wayPoints[wayPointIndex].y,10, 10);
 
-        gc.setFill(Color.BLUE);
-        gc.fillOval(x, y,10, 10);
+        gc.setFill(Color.LIGHTGREEN);
+        gc.fillRect(x, y, Config.TILE_SIZE, 4);
+
+        gc.setFill(Color.RED);
+        gc.fillRect(x, y, HEALTH - health, 4);
+
+
     }
 }

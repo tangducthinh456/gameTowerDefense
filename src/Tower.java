@@ -12,14 +12,12 @@ import java.util.*;
 
 public class Tower extends GameEntity{
 
-    long curentTime = 0;
-    int period = 500;
+    int period;
     int fireRate; // bullets per second
     double fireRange;
     Image gunImg;
     Image bulletImg;
-    public  int damage;
-    String type;
+    int damage;
     Queue<Enemy> enemyInScope = new LinkedList<>();
     List<Bullet> listBullet = new ArrayList<>();
 
@@ -64,53 +62,52 @@ public class Tower extends GameEntity{
 
     void calculateDirection(Enemy enemy)
     {
-        if (Point.distance(x, y, enemy.x, enemy.y) < fireRange)
+        double dx = x - enemy.x;
+        double dy = y - enemy.y;
+        if (dx == 0) dx++;
+        if (dy == 0) dy++;
+
+        if (dx > 0 && dy < 0)
         {
-            double dx = x - enemy.x;
-            double dy = y - enemy.y;
-            if (dx == 0) dx++;
-            if (dy == 0) dy++;
-
-            if (dx > 0 && dy < 0)
-            {
-                this.setDirection(180 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-            }
-            else if (dx > 0 && dy > 0)
-            {
-                this.setDirection(270 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-
-            }
-            else if (dx < 0 && dy > 0)
-            {
-                this.setDirection(0 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-            }
-            else if (dx < 0 && dy < 0)
-            {
-                this.setDirection(90 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-            }
-            if (listBullet.isEmpty())
-            {
-                listBullet.add( new Bullet(10, 30, x, y, this.getDirection()));
-                //double a= listBullet.get(0).direction
-            }
+            this.setDirection(180 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
+        }
+        else if (dx > 0 && dy > 0)
+        {
+            this.setDirection(270 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
 
         }
-        /*if (!listBullet.isEmpty())
+        else if (dx < 0 && dy > 0)
         {
-            listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-
-            listBullet.get(0).y -= Math.cos(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-
-            if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT || listBullet.get(0).isCollision(enemy)) listBullet.remove(0);
-            //if (enemyInScope.isEmpty()) listBullet.remove(0);
-        }*/
-        for (Bullet bullet : listBullet)
+            this.setDirection(0 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
+        }
+        else if (dx < 0 && dy < 0)
         {
+            this.setDirection(90 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
+        }
+
+        if (GameField.timeCount % period == 0)
+        {
+            listBullet.add( new Bullet(10, 40, x, y, this.getDirection()));
+            //double a= listBullet.get(0).direction
+        }
+
+        for(Iterator<Bullet> itr = listBullet.iterator(); itr.hasNext();)
+        {
+            Bullet bullet = itr.next();
             bullet.x += Math.sin(Math.toRadians(bullet.bulletDirection)) * (double)bullet.speed;
 
             bullet.y -= Math.cos(Math.toRadians(bullet.bulletDirection)) * (double)bullet.speed;
 
-            if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT || bullet.isCollision(enemy)) listBullet.remove(bullet);
+            if (bullet.isCollision(enemy))
+            {
+                enemy.health -= damage;
+                if (enemy.health <= 0)
+                {
+                    if (enemyInScope.contains(enemy)) enemyInScope.remove(enemy);
+                    GameField.enemyList.remove(enemy);
+                }
+            }
+            if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT || bullet.isCollision(enemy)) itr.remove();
             //if (enemyInScope.isEmpty()) listBullet.remove(0);
         }
     }
@@ -133,25 +130,18 @@ public class Tower extends GameEntity{
                 }
             }
         }
-        if(!enemyInScope.isEmpty()){ calculateDirection(enemyInScope.peek());
-            long a = GameField.timeStart - System.currentTimeMillis();
-    }
-        else if (!listBullet.isEmpty())
-        {
-            for (Bullet bullet : listBullet)
-            {
-                bullet.x += Math.sin(Math.toRadians(bullet.bulletDirection)) * (double)bullet.speed;
+        if(!enemyInScope.isEmpty()) calculateDirection(enemyInScope.peek());
+        else if (!listBullet.isEmpty()) {
+            for (Iterator<Bullet> itr = listBullet.iterator(); itr.hasNext(); ) {
+                Bullet bullet = itr.next();
+                bullet.x += Math.sin(Math.toRadians(bullet.bulletDirection)) * (double) bullet.speed;
 
-                bullet.y -= Math.cos(Math.toRadians(bullet.bulletDirection)) * (double)bullet.speed;
+                bullet.y -= Math.cos(Math.toRadians(bullet.bulletDirection)) * (double) bullet.speed;
 
-                if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT) listBullet.remove(bullet);
+                if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT)
+                    itr.remove();
                 //if (enemyInScope.isEmpty()) listBullet.remove(0);
             }
-           // listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-
-           // listBullet.get(0).y -= Math.cos(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
-
-           // if (listBullet.get(0).x <= 0 || listBullet.get(0).y <= 0 || listBullet.get(0).x >= Config.GAMEFIELD_WIDTH || listBullet.get(0).y >= Config.SCREEN_HEIGHT) listBullet.remove(0);
         }
     }
 }

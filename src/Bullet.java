@@ -32,7 +32,7 @@ public class Bullet extends GameEntity
         return bullet;
     }
 
-    public boolean isCollision(GameEntity enemy)
+    public boolean isCollision(Enemy enemy)
     {
         return Point.distance(enemy.x, enemy.y, x, y) < 25;
     }

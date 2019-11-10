@@ -61,6 +61,7 @@ public class TowerDefense extends Application
     {
         GameField.enemyList.forEach(GameEntity::update);
         GameField.towerList.forEach(Tower::update);
+        GameField.timeCount++;
     }
 
     public void render()

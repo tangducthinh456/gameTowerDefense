@@ -11,7 +11,7 @@ public class GameDraw {
         plane.speed = 10;
         plane.reward = 10;
         plane.damage = 5;
-        plane.health = 10;
+        plane.health = plane.HEALTH;
         plane.setDirection(0);
 
         plane.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile271.png");
@@ -26,6 +26,7 @@ public class GameDraw {
         tank.j = 10;
         tank.x = tank.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         tank.y = tank.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
+        tank.health = 100;
         tank.speed = 5;
         tank.setDirection(0);
         tank.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile268.png");
@@ -39,10 +40,12 @@ public class GameDraw {
         tower.x = m * Config.TILE_SIZE;
         tower.y = n * Config.TILE_SIZE;
         tower.setDirection(0);
+
         if (type.equals("NormalTower"))
         {
-            tower.radiusScope = 192;
+            tower.fireRange = 192;
             tower.damage = 4;
+            tower.period = 20;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
@@ -50,15 +53,17 @@ public class GameDraw {
         else if (type.equals("SnipperTower"))
         {
             tower.damage = 6;
-            tower.radiusScope = 200;
+            tower.fireRange = 200;
+            tower.period = 15;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile252.png");
         }
         else if (type.equals("MachineGunTower"))
         {
-            tower.radiusScope = 130;
+            tower.fireRange = 130;
             tower.damage = 2;
+            tower.period = 4;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile272.png");
@@ -66,4 +71,6 @@ public class GameDraw {
 
         return tower;
     }
+
+
 }
