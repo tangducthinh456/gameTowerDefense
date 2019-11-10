@@ -47,8 +47,9 @@ public class TowerDefense extends Application
         };
         timer.start();
 
-        GameField.enemyList.add(GameDraw.drawTank());
         GameField.enemyList.add(GameDraw.drawPlane());
+        GameField.enemyList.add(GameDraw.drawTank());
+
         GameField.towerList.add(GameDraw.drawTower(4, 2, "NormalTower"));
         GameField.towerList.add(GameDraw.drawTower(15, 9, "SnipperTower"));
         GameField.towerList.add(GameDraw.drawTower(2, 6, "MachineGunTower"));

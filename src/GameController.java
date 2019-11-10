@@ -7,13 +7,13 @@ public class GameController extends AnimationTimer {
 
     @Override
     public void handle(long l) {
-        render();
-        update();
+     //   render();
+       // update();
     }
 
-    public void update() {
-        gameField.entities.forEach(GameEntity::update);
-    }
+    //public void update() {
+       // gameField.entities.forEach(GameEntity::update);
+
     public void render()
     {
         //GameField.drawMap(gc);

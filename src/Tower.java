@@ -61,8 +61,6 @@ public class Tower extends GameEntity{
 
     void calculateDirection(Enemy enemy)
     {
-        if (Point.distance(x, y, enemy.x, enemy.y) < radiusScope)
-        {
             double dx = x - enemy.x;
             double dy = y - enemy.y;
             if (dx == 0) dx++;
@@ -99,7 +97,7 @@ public class Tower extends GameEntity{
                     },
                     period
             );
-        }
+
         /*if (!listBullet.isEmpty())
         {
             listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
@@ -138,9 +136,10 @@ public class Tower extends GameEntity{
                 }
             }
         }
-        if(!enemyInScope.isEmpty()){ calculateDirection(enemyInScope.peek());
-            long a = GameField.timeStart - System.currentTimeMillis();
-    }
+        if(!enemyInScope.isEmpty())
+        {
+            calculateDirection(enemyInScope.peek());
+        }
         else if (!listBullet.isEmpty())
         {
             for (Bullet bullet : listBullet)
