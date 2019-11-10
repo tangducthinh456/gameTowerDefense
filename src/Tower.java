@@ -15,7 +15,7 @@ public class Tower extends GameEntity{
     long curentTime = 0;
     int period = 500;
     int fireRate; // bullets per second
-    double radiusScope;
+    double fireRange;
     Image gunImg;
     Image bulletImg;
     public  int damage;
@@ -32,15 +32,18 @@ public class Tower extends GameEntity{
 
         if (!listBullet.isEmpty())
         {
-            ImageView iv = new ImageView(bulletImg);
-            SnapshotParameters params = new SnapshotParameters();
-            params.setFill(Color.TRANSPARENT);
-            params.setTransform(new Rotate(listBullet.get(0).bulletDirection, Config.TILE_SIZE / 2, Config.TILE_SIZE / 2));
-            //ImageView iv = new ImageView(gunImg);
-            params.setViewport(new Rectangle2D(0, 0, Config.TILE_SIZE, Config.TILE_SIZE));
+            for(Bullet bullet : listBullet)
+            {
+                ImageView iv = new ImageView(bulletImg);
+                SnapshotParameters params = new SnapshotParameters();
+                params.setFill(Color.TRANSPARENT);
+                params.setTransform(new Rotate(bullet.bulletDirection, Config.TILE_SIZE / 2, Config.TILE_SIZE / 2));
+                //ImageView iv = new ImageView(gunImg);
+                params.setViewport(new Rectangle2D(0, 0, Config.TILE_SIZE, Config.TILE_SIZE));
 
-            Image base = iv.snapshot(params, null);
-            gc.drawImage(base, listBullet.get(0).x, listBullet.get(0).y);
+                Image base = iv.snapshot(params, null);
+                gc.drawImage(base, bullet.x, bullet.y);
+            }
         }
 
 
@@ -61,6 +64,8 @@ public class Tower extends GameEntity{
 
     void calculateDirection(Enemy enemy)
     {
+        if (Point.distance(x, y, enemy.x, enemy.y) < fireRange)
+        {
             double dx = x - enemy.x;
             double dy = y - enemy.y;
             if (dx == 0) dx++;
@@ -83,21 +88,13 @@ public class Tower extends GameEntity{
             {
                 this.setDirection(90 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
             }
-            /*if (listBullet.isEmpty())
+            if (listBullet.isEmpty())
             {
                 listBullet.add( new Bullet(10, 30, x, y, this.getDirection()));
                 //double a= listBullet.get(0).direction
-            }*/
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            listBullet.add( new Bullet(10, 30, x, y, direction));
-                        }
-                    },
-                    period
-            );
+            }
 
+        }
         /*if (!listBullet.isEmpty())
         {
             listBullet.get(0).x += Math.sin(Math.toRadians(listBullet.get(0).bulletDirection)) * (double)listBullet.get(0).speed;
@@ -123,7 +120,7 @@ public class Tower extends GameEntity{
         for(Enemy enemy : GameField.enemyList)
         {
             //double m = Point.distance(enemy.x, enemy.y, x, y);
-            if (Point.distance(enemy.x, enemy.y, x, y) <= radiusScope)
+            if (Point.distance(enemy.x, enemy.y, x, y) <= fireRange)
             {
                 if(!enemyInScope.contains(enemy)) enemyInScope.add(enemy);
                 //else if (enemyInScope.contains(enemy)) enemyInScope.add(enemy);
@@ -136,10 +133,9 @@ public class Tower extends GameEntity{
                 }
             }
         }
-        if(!enemyInScope.isEmpty())
-        {
-            calculateDirection(enemyInScope.peek());
-        }
+        if(!enemyInScope.isEmpty()){ calculateDirection(enemyInScope.peek());
+            long a = GameField.timeStart - System.currentTimeMillis();
+    }
         else if (!listBullet.isEmpty())
         {
             for (Bullet bullet : listBullet)
