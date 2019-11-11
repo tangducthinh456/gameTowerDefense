@@ -40,20 +40,20 @@ public class TowerDefense extends Application
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
-            public void handle(long l) {
+            public void handle(long now) {
                 render();
                 update();
             }
         };
         timer.start();
+        GameField.enemyList.add(GameCreate.drawSmallerEnemy());
+        GameField.enemyList.add(GameCreate.drawPlane());
+        GameField.enemyList.add(GameCreate.drawTank());
 
-        GameField.enemyList.add(GameDraw.drawPlane());
-        GameField.enemyList.add(GameDraw.drawTank());
-
-        GameField.towerList.add(GameDraw.drawTower(4, 2, "NormalTower"));
-        GameField.towerList.add(GameDraw.drawTower(15, 9, "SnipperTower"));
-        GameField.towerList.add(GameDraw.drawTower(2, 6, "MachineGunTower"));
-        GameField.towerList.add(GameDraw.drawTower(2, 9, "NormalTower"));
+        GameField.towerList.add(GameCreate.drawTower(4, 2, "NormalTower"));
+        GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
+        GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
+        GameField.towerList.add(GameCreate.drawTower(2, 9, "NormalTower"));
 
     }
 

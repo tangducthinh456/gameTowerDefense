@@ -2,10 +2,10 @@ import javafx.scene.canvas.GraphicsContext;
 
 
 public abstract class Enemy extends GameEntity {
+
     double speed = 0;
-    final int HEALTH = 0;
     int health;
-    double reward = 0;
+    double reward;
     int damage = 0;
 
     int wayPointIndex = 0;

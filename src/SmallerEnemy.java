@@ -4,15 +4,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public class Tank extends Enemy {
-
-    Image gunImg;
-    int gunRotation;
-    final int HEALTH = 100;
+class SmallerEnemy extends Enemy
+{
+    final int HEALTH = 30;
 
     @Override
-    public void render(GraphicsContext gc)
-    {
+    public void render(GraphicsContext gc) {
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
 
@@ -20,17 +17,13 @@ public class Tank extends Enemy {
         iv.setRotate(this.getDirection());
         Image base = iv.snapshot(params, null);
 
-        ImageView iv2 = new ImageView(gunImg);
-        iv2.setRotate(this.getDirection());
-        Image gun = iv2.snapshot(params, null);
-
         gc.drawImage(base, x, y);
-        gc.drawImage(gun, x, y);
+
 
         gc.setFill(Color.LIGHTGREEN);
         gc.fillRect(x, y, Config.TILE_SIZE, 4);
 
         gc.setFill(Color.RED);
-        gc.fillRect(x, y, (int)((double)(HEALTH - health) / HEALTH * Config.TILE_SIZE) , 4);
+        gc.fillRect(x, y, (int)((double)(HEALTH - health) / HEALTH * Config.TILE_SIZE), 4);
     }
 }

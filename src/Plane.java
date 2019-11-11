@@ -6,9 +6,8 @@ import javafx.scene.paint.Color;
 
 class Plane extends Enemy
 {
-
     Image shadow;
-
+    final int HEALTH = 50;
 
     @Override
     public void render(GraphicsContext gc) {
@@ -28,15 +27,11 @@ class Plane extends Enemy
 
         gc.drawImage(base, x, y);
 
-        gc.setFill(Color.RED);
-        gc.fillOval(GameField.wayPoints[wayPointIndex].x,GameField.wayPoints[wayPointIndex].y,10, 10);
-
         gc.setFill(Color.LIGHTGREEN);
         gc.fillRect(x, y, Config.TILE_SIZE, 4);
 
         gc.setFill(Color.RED);
-        gc.fillRect(x, y, HEALTH - health, 4);
-
+        gc.fillRect(x, y, (int)((double)(HEALTH - health) / HEALTH * Config.TILE_SIZE), 4);
 
     }
 }

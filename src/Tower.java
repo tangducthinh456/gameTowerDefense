@@ -87,7 +87,7 @@ public class Tower extends GameEntity{
 
         if (GameField.timeCount % period == 0)
         {
-            listBullet.add( new Bullet(10, 40, x, y, this.getDirection()));
+            listBullet.add( new Bullet(10, 45, x, y, this.getDirection()));
             //double a= listBullet.get(0).direction
         }
 
