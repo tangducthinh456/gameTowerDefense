@@ -6,6 +6,7 @@ public class GameCreate {
         Plane plane = new Plane();
         plane.i = 0;
         plane.j = 10;
+        plane.armor = 2;
         plane.x = plane.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         plane.y = plane.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         plane.speed = 10;
@@ -26,6 +27,7 @@ public class GameCreate {
         sE.j = 10;
         sE.x = sE.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         sE.y = sE.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
+        sE.armor = 1;
         sE.speed = 15;
         sE.reward = 10;
         sE.damage = 5;
@@ -42,7 +44,8 @@ public class GameCreate {
         tank.j = 10;
         tank.x = tank.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         tank.y = tank.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        tank.health = 100;
+        tank.armor = 5;
+        tank.health = tank.HEALTH;
         tank.speed = 5;
         tank.setDirection(0);
         tank.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile268.png");
@@ -79,12 +82,28 @@ public class GameCreate {
         {
             tower.fireRange = 130;
             tower.damage = 3;
-            tower.period = 4;
+            tower.period = 3;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile272.png");
         }
 
         return tower;
+    }
+
+    public static Boss drawBoss()
+    {
+        Boss boss = new Boss();
+        boss.i = 0;
+        boss.j = 10;
+        boss.x = boss.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
+        boss.y = boss.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
+        boss.armor = 5;
+        boss.health = boss.HEALTH;
+        boss.speed = 3;
+        boss.setDirection(0);
+        boss.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile269.png");
+        boss.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile292.png");
+        return boss;
     }
 }

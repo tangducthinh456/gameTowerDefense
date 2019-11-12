@@ -3,10 +3,11 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Enemy extends GameEntity {
 
-    double speed = 0;
-    int health;
-    double reward;
-    int damage = 0;
+    protected double speed;
+    protected int health;
+    protected double reward;
+    protected int damage;
+    protected int armor;
 
     int wayPointIndex = 0;
 
@@ -21,7 +22,7 @@ public abstract class Enemy extends GameEntity {
         // Tinh huong di tiep theo cho Object
         if (wayPointIndex >= GameField.wayPoints.length) {
             // Enemy den way point cuoi
-            return;
+            GameField.enemyList.remove(this);
         }
 
         Point currentWP = GameField.wayPoints[wayPointIndex];

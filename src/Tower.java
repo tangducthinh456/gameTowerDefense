@@ -22,8 +22,6 @@ public class Tower extends GameEntity{
     List<Bullet> listBullet = new ArrayList<>();
 
 
-
-
     @Override
     void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
@@ -56,8 +54,6 @@ public class Tower extends GameEntity{
 
         Image base = iv.snapshot(params, null);
         gc.drawImage(base, x, y);
-
-
     }
 
     void calculateDirection(Enemy enemy)
@@ -130,6 +126,7 @@ public class Tower extends GameEntity{
                 }
             }
         }
+
         if(!enemyInScope.isEmpty()) calculateDirection(enemyInScope.peek());
         else if (!listBullet.isEmpty()) {
             for (Iterator<Bullet> itr = listBullet.iterator(); itr.hasNext(); ) {

@@ -39,8 +39,10 @@ public class TowerDefense extends Application
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
+
             @Override
-            public void handle(long now) {
+            public void handle(long now)
+            {
                 render();
                 update();
             }
@@ -49,13 +51,15 @@ public class TowerDefense extends Application
         GameField.enemyList.add(GameCreate.drawSmallerEnemy());
         GameField.enemyList.add(GameCreate.drawPlane());
         GameField.enemyList.add(GameCreate.drawTank());
+        GameField.enemyList.add(GameCreate.drawBoss());
 
         GameField.towerList.add(GameCreate.drawTower(4, 2, "NormalTower"));
-        GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
+        //GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
         GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
         GameField.towerList.add(GameCreate.drawTower(2, 9, "NormalTower"));
 
     }
+
 
     public void update()
     {

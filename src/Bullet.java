@@ -31,6 +31,7 @@ public class Bullet extends GameEntity
         Bullet bullet = new Bullet(damage, speed, x, y, bulletDirection);
         return bullet;
     }
+    Image base;
 
     public boolean isCollision(Enemy enemy)
     {
@@ -46,7 +47,7 @@ public class Bullet extends GameEntity
         //ImageView iv = new ImageView(gunImg);
         params.setViewport(new Rectangle2D(0, 0, Config.TILE_SIZE, Config.TILE_SIZE));
 
-        Image base = iv.snapshot(params, null);
+        base = iv.snapshot(params, null);
 
         gc.drawImage(base, x, y);
     }
