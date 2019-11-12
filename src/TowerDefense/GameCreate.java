@@ -74,8 +74,8 @@ public class GameCreate {
         }
         else if (type.equals("SnipperTower"))
         {
-            tower.damage = 30;
-            tower.fireRange = 200;
+            tower.damage = 40;
+            tower.fireRange = 300;
             tower.period = 20;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png");
