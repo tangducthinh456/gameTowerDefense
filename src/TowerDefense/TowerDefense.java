@@ -65,7 +65,7 @@ public class TowerDefense extends Application
         GameField.towerList.add(GameCreate.drawTower(4, 2, "NormalTower"));
         //GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
         GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
-        GameField.towerList.add(GameCreate.drawTower(2, 9, "NormalTower"));
+        GameField.towerList.add(GameCreate.drawTower(7, 8, "SnipperTower"));
 
     }
 
