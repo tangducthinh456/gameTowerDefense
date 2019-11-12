@@ -31,7 +31,7 @@ public class GameCreate {
         sE.x = sE.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         sE.y = sE.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         sE.armor = 1;
-        sE.speed = 15;
+        sE.speed = 18;
         sE.reward = 10;
         sE.damage = 5;
         sE.health = sE.HEALTH;
@@ -69,7 +69,7 @@ public class GameCreate {
             tower.damage = 15;
             tower.period = 10;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
-            tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
+            tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
         }
         else if (type.equals("SnipperTower"))
