@@ -9,7 +9,7 @@ import Entity.*;
 import TowerDefense.*;
 public class SmallerEnemy extends Enemy
 {
-    public final int HEALTH = 30;
+    public final int HEALTH = 40;
 
     @Override
     public void render(GraphicsContext gc) {

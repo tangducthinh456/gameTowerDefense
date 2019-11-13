@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TowerDefense extends Application
+public class Main extends Application
 {
 
     GraphicsContext gc;
