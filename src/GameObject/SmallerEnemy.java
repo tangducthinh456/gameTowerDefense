@@ -9,7 +9,10 @@ import Entity.*;
 import TowerDefense.*;
 public class SmallerEnemy extends Enemy
 {
-    public final int HEALTH = 40;
+    public SmallerEnemy(int HEALTH)
+    {
+        super(HEALTH);
+    }
 
     @Override
     public void render(GraphicsContext gc) {

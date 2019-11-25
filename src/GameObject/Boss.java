@@ -11,8 +11,12 @@ import TowerDefense.*;
 public class Boss extends Enemy
 {
     public Image gunImg;
-    int gunRotation;
-    public final int HEALTH = 100;
+    //int gunRotation;
+    public Boss(int HEALTH)
+    {
+        super(HEALTH);
+    }
+
 
     @Override
     public void render(GraphicsContext gc)

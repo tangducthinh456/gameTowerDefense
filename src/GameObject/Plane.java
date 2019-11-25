@@ -11,7 +11,11 @@ import TowerDefense.*;
 public class Plane extends Enemy
 {
     public Image shadow;
-    public final int HEALTH = 50;
+
+    public Plane(int HEALTH)
+    {
+        super(HEALTH);
+    }
 
     @Override
     public void render(GraphicsContext gc) {

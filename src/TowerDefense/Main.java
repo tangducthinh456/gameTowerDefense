@@ -57,18 +57,30 @@ public class Main extends Application
             }
         };
         timer.start();
-        GameField.enemyList.add(GameCreate.drawSmallerEnemy());
-        GameField.enemyList.add(GameCreate.drawPlane());
-        GameField.enemyList.add(GameCreate.drawTank());
-        GameField.enemyList.add(GameCreate.drawBoss());
 
-        GameField.towerList.add(GameCreate.drawTower(4, 2, "NormalTower"));
+        if (GameField.timeCount % 10 == 0 && GameField.timeCount < 4000)
+            GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 20, 1));
+
+        //GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 20, 1));
+        //GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 200, 5));
+        //GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 150, 5));
+        //GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 90, 2));
+
+
+
+        GameField.towerList.add(GameCreate.drawTower(10, 3, "NormalTower"));
+
         //GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
         GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
+
         GameField.towerList.add(GameCreate.drawTower(7, 8, "SnipperTower"));
+        GameField.towerList.add(GameCreate.drawTower(10, 2, "MachineGunTower"));
+
+        GameField.towerList.add(GameCreate.drawTower(1, 2, "NormalTower"));
+        //GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
+        GameField.towerList.add(GameCreate.drawTower(7, 2, "MachineGunTower"));
 
     }
-
 
     public void update()
     {

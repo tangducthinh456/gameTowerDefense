@@ -12,6 +12,13 @@ public abstract class Enemy extends GameEntity {
     public int damage;
     public int armor;
 
+    public final int HEALTH;
+
+    public Enemy(int HEALTH)
+    {
+        this.HEALTH = HEALTH;
+    }
+
     int wayPointIndex = 0;
 
     public Point getNextWayPoint()

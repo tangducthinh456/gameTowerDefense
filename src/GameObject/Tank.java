@@ -11,8 +11,11 @@ import TowerDefense.*;
 public class Tank extends Enemy {
 
     public Image gunImg;
-    int gunRotation;
-    public final int HEALTH = 100;
+    //int gunRotation;
+    public Tank(int HEALTH)
+    {
+        super(HEALTH);
+    }
 
     @Override
     public void render(GraphicsContext gc)

@@ -4,17 +4,17 @@ import javafx.scene.image.Image;
 import GameObject.*;
 
 public class GameCreate {
-    public static Plane drawPlane()
+    public static Plane drawPlane(double speed, int reward, int damage, int health, int armor)
     {
-        Plane plane = new Plane();
+        Plane plane = new Plane(health);
         plane.i = 0;
         plane.j = 10;
-        plane.armor = 2;
+        plane.armor = armor; //2;
         plane.x = plane.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         plane.y = plane.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        plane.speed = 10;
-        plane.reward = 10;
-        plane.damage = 5;
+        plane.speed = speed;    //10;
+        plane.reward = reward;       //10;
+        plane.damage = damage;   //5;
         plane.health = plane.HEALTH;
         plane.setDirection(0);
 
@@ -23,33 +23,35 @@ public class GameCreate {
         return plane;
     }
 
-    public static SmallerEnemy drawSmallerEnemy()
+    public static SmallerEnemy drawSmallerEnemy(double speed, int reward, int damage, int health, int armor)
     {
-        SmallerEnemy sE = new SmallerEnemy();
+        SmallerEnemy sE = new SmallerEnemy(health);
         sE.i = 0;
         sE.j = 10;
         sE.x = sE.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         sE.y = sE.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        sE.armor = 1;
-        sE.speed = 18;
-        sE.reward = 10;
-        sE.damage = 5;
+        sE.armor = armor; //1;
+        sE.speed = speed; //18;
+        sE.reward = reward;// 10;
+        sE.damage = damage;  //5;
         sE.health = sE.HEALTH;
         sE.setDirection(0);
         sE.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile247.png");
         return sE;
     }
 
-    public static Tank drawTank()
+    public static Tank drawTank(double speed, int reward, int damage, int health, int armor)
     {
-        Tank tank = new Tank();
+        Tank tank = new Tank(health);
         tank.i = 0;
         tank.j = 10;
         tank.x = tank.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         tank.y = tank.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        tank.armor = 5;
+        tank.armor = armor; //5;
         tank.health = tank.HEALTH;
-        tank.speed = 5;
+        tank.damage = damage; //20;
+        tank.speed = speed; //5;
+        tank.reward = reward;  // 20
         tank.setDirection(0);
         tank.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile268.png");
         tank.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile291.png");
@@ -94,16 +96,16 @@ public class GameCreate {
         return tower;
     }
 
-    public static Boss drawBoss()
+    public static Boss drawBoss(double speed, int reward, int damage, int health, int armor)
     {
-        Boss boss = new Boss();
+        Boss boss = new Boss(health);
         boss.i = 0;
         boss.j = 10;
         boss.x = boss.i * Config.TILE_SIZE + Config.TILE_SIZE / 2;
         boss.y = boss.j * Config.TILE_SIZE + Config.TILE_SIZE / 2;
-        boss.armor = 5;
+        boss.armor = armor; //5;
         boss.health = boss.HEALTH;
-        boss.speed = 3;
+        boss.speed = speed; //3;
         boss.setDirection(0);
         boss.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile269.png");
         boss.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile292.png");

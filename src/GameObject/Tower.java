@@ -45,8 +45,6 @@ public class Tower extends GameEntity{
             }
         }
 
-
-
         ImageView iv = new ImageView(gunImg);
         SnapshotParameters params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);
@@ -66,23 +64,6 @@ public class Tower extends GameEntity{
         if (dx == 0) dx++;
         if (dy == 0) dy++;
 
-        /*if (dx > 0 && dy < 0)
-        {
-            this.setDirection(180 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-        }
-        else if (dx > 0 && dy > 0)
-        {
-            this.setDirection(270 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-
-        }
-        else if (dx < 0 && dy > 0)
-        {
-            this.setDirection(0 + Math.toDegrees(Math.atan((Math.abs((double)dx / dy)))));
-        }
-        else if (dx < 0 && dy < 0)
-        {
-            this.setDirection(90 + Math.toDegrees(Math.atan((Math.abs((double)dy / dx)))));
-        }*/
         this.setDirection(270 + Math.toDegrees(Math.atan2((double)dy, (double)dx)));
 
         if (GameField.timeCount % period == 0)
