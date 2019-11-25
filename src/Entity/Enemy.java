@@ -23,17 +23,19 @@ public abstract class Enemy extends GameEntity {
 
     public Point getNextWayPoint()
     {
-        if (wayPointIndex < GameField.wayPoints.length - 1)
+        if (wayPointIndex < GameField.wayPoints.length - 2)
             return GameField.wayPoints[++wayPointIndex];
         return null;
     }
 
     void calculateDirection() {
         // Tinh huong di tiep theo cho Object
-        if (wayPointIndex >= GameField.wayPoints.length) {
+        if (wayPointIndex >= GameField.wayPoints.length - 1) {
             // Enemy den way point cuoi
             GameField.enemyList.remove(this);
+            GameField.MYHEALTH -= this.damage;
         }
+
 
         Point currentWP = GameField.wayPoints[wayPointIndex];
 

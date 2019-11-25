@@ -58,13 +58,12 @@ public class Main extends Application
         };
         timer.start();
 
-        if (GameField.timeCount % 10 == 0 && GameField.timeCount < 4000)
-            GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 20, 1));
 
-        //GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 20, 1));
-        //GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 200, 5));
-        //GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 150, 5));
-        //GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 90, 2));
+
+        //GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
+        //GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
+        //GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
+        //GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
 
 
 
@@ -84,9 +83,22 @@ public class Main extends Application
 
     public void update()
     {
+        if (GameField.MYHEALTH <= 0)
+        {
+            System.out.println("a");
+        }
         GameField.enemyList.forEach(GameEntity::update);
         GameField.towerList.forEach(Tower::update);
         GameField.timeCount++;
+        if (GameField.timeCount % 50 == 0 && GameField.timeCount < 1000)
+            GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
+        if (GameField.timeCount % 20 == 0 && GameField.timeCount < 21)
+            GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
+        if (GameField.timeCount % 30 == 0 && GameField.timeCount < 31)
+            GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
+        if (GameField.timeCount % 40 == 0 && GameField.timeCount < 41)
+            GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
+
     }
 
     public void render()
