@@ -45,6 +45,7 @@ public class Main extends Application
 
         // Them scene vao stage
         stage.setScene(scene);
+        GameField.drawMap(gc);
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
@@ -52,6 +53,10 @@ public class Main extends Application
             @Override
             public void handle(long now)
             {
+                if (GameField.MYHEALTH <= 0)
+                {
+                    return;
+                }
                 render();
                 update();
             }
@@ -60,11 +65,22 @@ public class Main extends Application
 
 
 
-        //GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
-        //GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
-        //GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
-        //GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
 
+
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
+        GameField.enemyListInQueue.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
+        GameField.enemyListInQueue.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
 
 
         GameField.towerList.add(GameCreate.drawTower(10, 3, "NormalTower"));
@@ -81,24 +97,27 @@ public class Main extends Application
 
     }
 
+    int i = 0;
     public void update()
     {
-        if (GameField.MYHEALTH <= 0)
+        if (GameField.timeCount % 10 == 0 && GameField.timeCount < 10 * GameField.enemyListInQueue.size() - 10 + 1)
         {
-            System.out.println("a");
+            GameField.enemyList.add(GameField.enemyListInQueue.get(i));
+            i++;
         }
+
         GameField.enemyList.forEach(GameEntity::update);
         GameField.towerList.forEach(Tower::update);
         GameField.timeCount++;
-        if (GameField.timeCount % 50 == 0 && GameField.timeCount < 1000)
+
+        /*if (GameField.timeCount % 10 == 0 && GameField.timeCount < 11)
             GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
         if (GameField.timeCount % 20 == 0 && GameField.timeCount < 21)
             GameField.enemyList.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
         if (GameField.timeCount % 30 == 0 && GameField.timeCount < 31)
             GameField.enemyList.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
         if (GameField.timeCount % 40 == 0 && GameField.timeCount < 41)
-            GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
-
+            GameField.enemyList.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));*/
     }
 
     public void render()

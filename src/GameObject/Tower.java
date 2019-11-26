@@ -108,6 +108,7 @@ public class Tower extends GameEntity{
                 if (enemy == enemyInScope.peek())
                 {
                     Object firstElement = enemyInScope.remove();
+                    GameField.numberEnemyInField--;
                 }
             }
         }

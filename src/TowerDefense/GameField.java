@@ -12,9 +12,16 @@ import Entity.*;
 public class GameField
 {
     public static List<Enemy> enemyList = new ArrayList<>();
+    public static List<Enemy> enemyListInQueue = new ArrayList<>();
+
+    
+    
+    //public static List<Enemy> enemyListToRemove = new ArrayList<>();
     public static List<Tower> towerList = new ArrayList<>();
+    public static int numberEnemyInField = enemyListInQueue.size();
     public static long timeCount = 0;
     public static int MYHEALTH = 100;
+    public static int currentLEVEL = 1;
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024" },
@@ -44,7 +51,7 @@ public class GameField
             new Point(16 * Config.TILE_SIZE + Config.TILE_SIZE / 2, 4 * Config.TILE_SIZE + Config.TILE_SIZE / 2),
             new Point(16 * Config.TILE_SIZE + Config.TILE_SIZE / 2, 4 * Config.TILE_SIZE + Config.TILE_SIZE / 2),
             new Point(16 * Config.TILE_SIZE + Config.TILE_SIZE / 2, 11 * Config.TILE_SIZE + Config.TILE_SIZE / 2),
-            new Point(17 * Config.TILE_SIZE + Config.TILE_SIZE / 2, 11 * Config.TILE_SIZE + Config.TILE_SIZE / 2)
+            //new Point(17 * Config.TILE_SIZE + Config.TILE_SIZE / 2, 11 * Config.TILE_SIZE + Config.TILE_SIZE / 2)
     };
 
     public static void drawMap(GraphicsContext gc) {
