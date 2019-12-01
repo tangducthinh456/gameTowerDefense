@@ -22,6 +22,7 @@ public class GameField
     public static long timeCount = 0;
     public static int MYHEALTH = 100;
     public static int currentLEVEL = 1;
+    public static boolean onPlay = true;
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024" },

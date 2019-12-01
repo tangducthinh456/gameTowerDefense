@@ -61,7 +61,8 @@ public class Main extends Application
                 update();
             }
         };
-        timer.start();
+
+        if (GameField.onPlay) timer.start();
 
 
 
@@ -109,6 +110,8 @@ public class Main extends Application
         GameField.enemyList.forEach(GameEntity::update);
         GameField.towerList.forEach(Tower::update);
         GameField.timeCount++;
+
+        if (GameField.numberEnemyInField == 0) GameField.onPlay = false;
 
         /*if (GameField.timeCount % 10 == 0 && GameField.timeCount < 11)
             GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
