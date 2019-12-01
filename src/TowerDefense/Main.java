@@ -46,6 +46,8 @@ public class Main extends Application
         // Them scene vao stage
         stage.setScene(scene);
         GameField.drawMap(gc);
+        gc.setFill(Color.DEEPPINK);
+        gc.fillRect(Config.TILE_SIZE * 19, 0, Config.TILE_SIZE * 5, Config.TILE_SIZE * 12);
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
@@ -58,11 +60,11 @@ public class Main extends Application
                     return;
                 }
                 render();
-                update();
+                if (GameField.onPlay) update();
             }
         };
 
-        if (GameField.onPlay) timer.start();
+         timer.start();
 
 
 
@@ -126,7 +128,7 @@ public class Main extends Application
     public void render()
     {
         GameField.drawMap(gc);
-        GameField.enemyList.forEach(g -> g.render(gc));
+        if (GameField.onPlay) GameField.enemyList.forEach(g -> g.render(gc));
         GameField.towerList.forEach(g->g.render(gc));
     }
 
