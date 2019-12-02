@@ -82,10 +82,13 @@ public class Tower extends GameEntity{
             if (bullet.isCollision(enemy))
             {
                 enemy.health -= damage;
+                //System.out.println(enemy.health);
                 if (enemy.health <= 0)
                 {
                     if (enemyInScope.contains(enemy)) enemyInScope.remove(enemy);
                     GameField.enemyList.remove(enemy);
+                    GameField.numberEnemyInField--;
+                    System.out.println(GameField.numberEnemyInField);
                 }
             }
             if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT || bullet.isCollision(enemy)) itr.remove();
@@ -108,7 +111,6 @@ public class Tower extends GameEntity{
                 if (enemy == enemyInScope.peek())
                 {
                     Object firstElement = enemyInScope.remove();
-                    GameField.numberEnemyInField--;
                 }
             }
         }

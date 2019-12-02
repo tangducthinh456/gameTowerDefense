@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,45 +48,34 @@ public class Main extends Application
         // Them scene vao stage
         stage.setScene(scene);
         GameField.drawMap(gc);
-        gc.setFill(Color.DEEPPINK);
-        gc.fillRect(Config.TILE_SIZE * 19, 0, Config.TILE_SIZE * 5, Config.TILE_SIZE * 12);
+        //GameField.drawController(gc);
+
+        Image startButton = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png");
+        //if (startButton != null) System.out.println("null");
+        //ImageView button = new ImageView(startButton);
+        gc.drawImage(startButton, Config.TILE_SIZE * 21, 150);
+
         stage.show();
 
-        AnimationTimer timer = new AnimationTimer() {
 
-            @Override
-            public void handle(long now)
-            {
-                if (GameField.MYHEALTH <= 0)
-                {
-                    return;
-                }
-                render();
-                if (GameField.onPlay) update();
-            }
-        };
-
-         timer.start();
+        //GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        //GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        //GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        //GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
+        /*GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 30, 1));*/
 
 
+        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
+        GameField.enemyListInQueue.add(GameCreate.drawTank(5, 20, 20, 150, 5));
+        GameField.enemyListInQueue.add(GameCreate.drawBoss(3, 30, 10, 200, 5));
+        GameField.enemyListInQueue.add(GameCreate.drawPlane(10, 10, 5, 100, 2));
 
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 10, 2000, 1));
-
-
-        GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
-        GameField.enemyListInQueue.add(GameCreate.drawTank(5, 20, 20, 1500, 5));
-        GameField.enemyListInQueue.add(GameCreate.drawBoss(3, 30, 10, 2000, 5));
-        GameField.enemyListInQueue.add(GameCreate.drawPlane(10, 10, 5, 9000, 2));
-
+        GameField.numberEnemyInField = GameField.enemyListInQueue.size();
 
         GameField.towerList.add(GameCreate.drawTower(10, 3, "NormalTower"));
 
@@ -98,6 +89,22 @@ public class Main extends Application
         //GameField.towerList.add(GameCreate.drawTower(15, 9, "SnipperTower"));
         GameField.towerList.add(GameCreate.drawTower(7, 2, "MachineGunTower"));
 
+
+        AnimationTimer timer = new AnimationTimer() {
+
+            @Override
+            public void handle(long now)
+            {
+                if (GameField.MYHEALTH <= 0)
+                {
+                    GameField.onPlay = false;
+                }
+                render();
+                if (GameField.onPlay) update();
+            }
+        };
+
+        timer.start();
     }
 
     int i = 0;
@@ -109,11 +116,17 @@ public class Main extends Application
             i++;
         }
 
+
         GameField.enemyList.forEach(GameEntity::update);
         GameField.towerList.forEach(Tower::update);
         GameField.timeCount++;
 
-        if (GameField.numberEnemyInField == 0) GameField.onPlay = false;
+        if (GameField.numberEnemyInField == 0)
+        {
+            //GameField.timeCount = 0;
+            //i = 0;
+            //GameField.numberEnemyInField =  GameField.enemyListInQueue.size();
+        }
 
         /*if (GameField.timeCount % 10 == 0 && GameField.timeCount < 11)
             GameField.enemyList.add(GameCreate.drawSmallerEnemy(18, 10, 5, 2000, 1));
