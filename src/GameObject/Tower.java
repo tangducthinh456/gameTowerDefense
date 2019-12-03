@@ -88,7 +88,7 @@ public class Tower extends GameEntity{
                     if (enemyInScope.contains(enemy)) enemyInScope.remove(enemy);
                     GameField.enemyList.remove(enemy);
                     GameField.numberEnemyInField--;
-                    System.out.println(GameField.numberEnemyInField);
+                    //System.out.println(GameField.numberEnemyInField);
                 }
             }
             if (bullet.x <= 0 || bullet.y <= 0 || bullet.x >= Config.GAMEFIELD_WIDTH || bullet.y >= Config.SCREEN_HEIGHT || bullet.isCollision(enemy)) itr.remove();

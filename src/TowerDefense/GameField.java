@@ -21,8 +21,8 @@ public class GameField
     public static int numberEnemyInField;
     public static long timeCount = 0;
     public static int MYHEALTH = 100;
-    public static int currentLEVEL = 1;
-    public static boolean onPlay = true;
+    public static int currentLEVEL = 0;
+    public static boolean onPlay = false;
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024"},
@@ -41,6 +41,13 @@ public class GameField
 
     public static final String[][] CONTROLLER_SPRITES = new String[][]
             {
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
+                    {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"},
@@ -75,7 +82,7 @@ public class GameField
     public static void drawController(GraphicsContext gc) {
         for (int i = 0; i < CONTROLLER_SPRITES.length; i++) {
             for (int j = 0; j < CONTROLLER_SPRITES[i].length; j++) {
-                gc.drawImage(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile" + MAP_SPRITES[i][j] + ".png"), (j + 18) * Config.TILE_SIZE , i * Config.TILE_SIZE);
+                gc.drawImage(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile" + CONTROLLER_SPRITES[i][j] + ".png"), (j + 19) * Config.TILE_SIZE , i * Config.TILE_SIZE);
             }
         }
     }
