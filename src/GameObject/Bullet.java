@@ -10,8 +10,8 @@ import javafx.scene.transform.Rotate;
 import Entity.*;
 import TowerDefense.*;
 
-import java.awt.*;
-import java.sql.BatchUpdateException;
+//import java.awt.*;
+//import java.sql.BatchUpdateException;
 
 public class Bullet extends GameEntity
 {
