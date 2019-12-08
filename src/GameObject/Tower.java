@@ -23,6 +23,7 @@ public class Tower extends GameEntity{
     public int damage;
     Queue<Enemy> enemyInScope = new LinkedList<>();
     List<Bullet> listBullet = new ArrayList<>();
+    public boolean onMouse = false;
 
 
     @Override

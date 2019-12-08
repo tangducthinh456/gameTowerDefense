@@ -8,11 +8,11 @@ public class GameController {
     {
         if (level == 1)
         {
-            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
-            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
-            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
-            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
-            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 30, 1));
+            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 3000, 1));
+            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 3000, 1));
+            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 3000, 1));
+            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 3000, 1));
+            GameField.enemyListInQueue.add(GameCreate.drawSmallerEnemy(18, 10, 5, 3000, 1));
             GameField.enemyListInQueue.add(GameCreate.drawTank(5, 20, 20, 150, 5));
             GameField.enemyListInQueue.add(GameCreate.drawBoss(3, 30, 10, 200, 5));
             GameField.enemyListInQueue.add(GameCreate.drawPlane(10, 10, 5, 100, 2));
