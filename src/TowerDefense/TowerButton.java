@@ -11,8 +11,11 @@ import javafx.scene.paint.Color;
 
 
 public class TowerButton {
-    public static void addButton(Group root, Image towerImg, Image gunImg, int x, int y)
+    public static void addButton(Group root, String stowerImg, String sgunImg, int x, int y)
     {
+        Image towerImg = new Image(stowerImg);
+        Image gunImg = new Image(sgunImg);
+
         ImageView towerIv = new ImageView(towerImg);
         ImageView gunIv = new ImageView(gunImg);
 
@@ -26,18 +29,22 @@ public class TowerButton {
         Button button = new Button("", gunButton);
         button.setOnMouseClicked(actionEvent -> {
             root.setCursor(new ImageCursor(img, Config.TILE_SIZE, Config.TILE_SIZE));
-            GameField.onClick = true;
+
+            //System.out.println(nor.toString());
+            if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png")) GameField.onClick = 1; //GameField.onClick = 1;
+            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png")) GameField.onClick = 2;
+            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png")) GameField.onClick = 3;
         });
         button.setLayoutX(x);
         button.setLayoutY(y);
         root.getChildren().add(button);
     }
 
-    static ImageCursor Cursors(boolean color) {
-        Image towerImg = new Image("file:resources/towerDefense_tile181.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
-        Image gunImg = new Image("file:resources/towerDefense_tile249.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
-        Image red = new Image("file:resources/red.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
-        Image green = new Image("file:resources/green.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
+    static ImageCursor Cursors(boolean color, Image towerImg, Image gunImg) {
+        //Image towerImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
+        //Image gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
+        Image red = new Image("file:AssetsKit_2/PNG/Default size/red.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
+        Image green = new Image("file:AssetsKit_2/PNG/Default size/green.png", Config.TILE_SIZE, Config.TILE_SIZE, true, false);
         ImageView towerIv = new ImageView(towerImg);
         ImageView gunIv = new ImageView(gunImg);
         ImageView redIv = new ImageView(red);

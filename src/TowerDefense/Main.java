@@ -52,7 +52,7 @@ public class Main extends Application
         // Them scene vao stage
         stage.setScene(scene);
         GameField.drawMap(gc);
-        GameField.drawController(gc);
+        //GameField.drawController(gc);
 
         //Image startButton = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png");
         ImageView button = new ImageView(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png"));
@@ -90,9 +90,9 @@ public class Main extends Application
         machineGun.setY(Config.TILE_SIZE * 7);
          */
 
-        TowerButton.addButton(root, normalTower, nor,Config.TILE_SIZE * 20, Config.TILE_SIZE * 5);
-        TowerButton.addButton(root, snipperTower, snip,Config.TILE_SIZE * 22, Config.TILE_SIZE * 5);
-        TowerButton.addButton(root, machinegunTower, machi,Config.TILE_SIZE * 21, Config.TILE_SIZE * 7);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png",Config.TILE_SIZE * 20, Config.TILE_SIZE * 5);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png",Config.TILE_SIZE * 22, Config.TILE_SIZE * 5);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png",Config.TILE_SIZE * 21, Config.TILE_SIZE * 7);
 
 
         root.getChildren().add(button);
@@ -110,11 +110,14 @@ public class Main extends Application
 
         root.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
             Point p = MouseInfo.getPointerInfo().getLocation();
-            if (GameField.onClick && GameField.MAP_SPRITES[p.y/Config.TILE_SIZE][p.x/Config.TILE_SIZE].equals("024")) {
-                System.out.println(p.y / Config.TILE_SIZE);
-                System.out.println(p.x / Config.TILE_SIZE);
-                GameField.towerList.add(GameCreate.drawTower(p.x/Config.TILE_SIZE,p.y/Config.TILE_SIZE, "NormalTower"));
-                GameField.onClick = false;
+            if ((GameField.onClick != 0) && GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024")) {
+                String towerType = "";
+                if (GameField.onClick == 1) towerType = "NormalTower";
+                else if (GameField.onClick == 2) towerType = "SnipperTower";
+                else if (GameField.onClick == 3) towerType = "MachineGunTower";
+                GameField.towerList.add(GameCreate.drawTower(p.x/Config.TILE_SIZE,p.y/Config.TILE_SIZE - 1, towerType));
+                //GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE] = "file:AssetsKit_2/PNG/Default size/towerDefense_tile306.png";
+                GameField.onClick = 0;
                 root.setCursor(Cursor.DEFAULT);
             }
         });
@@ -128,7 +131,6 @@ public class Main extends Application
                 GameController.createEnemyInLevel(GameField.currentLEVEL);
                 GameField.timeCount = 0;
                 i = 0;
-                //System.out.println("hihi");
             }
         };
 
@@ -137,15 +139,15 @@ public class Main extends Application
         stage.show();
 
 
-        GameField.towerList.add(GameCreate.drawTower(10, 3, "NormalTower"));
+        //GameField.towerList.add(GameCreate.drawTower(10, 3, "NormalTower"));
 
-        GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
+        //GameField.towerList.add(GameCreate.drawTower(2, 6, "MachineGunTower"));
 
-        GameField.towerList.add(GameCreate.drawTower(7, 8, "SnipperTower"));
-        GameField.towerList.add(GameCreate.drawTower(10, 2, "MachineGunTower"));
+        //GameField.towerList.add(GameCreate.drawTower(7, 8, "SnipperTower"));
+        //GameField.towerList.add(GameCreate.drawTower(10, 2, "MachineGunTower"));
 
-        GameField.towerList.add(GameCreate.drawTower(1, 2, "NormalTower"));
-        GameField.towerList.add(GameCreate.drawTower(7, 2, "MachineGunTower"));
+        //GameField.towerList.add(GameCreate.drawTower(1, 2, "NormalTower"));
+        //GameField.towerList.add(GameCreate.drawTower(7, 2, "MachineGunTower"));
 
 
         AnimationTimer timer = new AnimationTimer() {
@@ -153,19 +155,31 @@ public class Main extends Application
             @Override
             public void handle(long now)
             {
-                Point p;
+
                 if (GameField.MYHEALTH <= 0)
                 {
                     return;
                 }
+
                 render();
                 update();
-
-                p = MouseInfo.getPointerInfo().getLocation();
-                if (GameField.onClick && p.x < 24 * Config.TILE_SIZE && p.y < 12 * Config.TILE_SIZE && p.x > Config.TILE_SIZE && p.y > Config.TILE_SIZE && GameField.canPut != GameField.MAP_SPRITES[p.y/Config.TILE_SIZE][p.x/Config.TILE_SIZE].equals("024")) {
-                    root.setCursor(TowerButton.Cursors(GameField.MAP_SPRITES[p.y/Config.TILE_SIZE][p.x/Config.TILE_SIZE].equals("024")));
-                    GameField.canPut = GameField.MAP_SPRITES[p.y / Config.TILE_SIZE][p.x / Config.TILE_SIZE].equals("024");
+                Point p = MouseInfo.getPointerInfo().getLocation();
+                if ((GameField.onClick != 0) && p.x < 19 * Config.TILE_SIZE && p.y < 12 * Config.TILE_SIZE && p.x > Config.TILE_SIZE && p.y > Config.TILE_SIZE && GameField.canPut != GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024")) {
+                    if (GameField.onClick == 1)
+                    {
+                        root.setCursor(TowerButton.Cursors(GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024"), normalTower, nor));
+                    }
+                    else if (GameField.onClick == 2)
+                    {
+                        root.setCursor(TowerButton.Cursors(GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024"), snipperTower, snip));
+                    }
+                    else if (GameField.onClick == 3)
+                    {
+                        root.setCursor(TowerButton.Cursors(GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024"), machinegunTower, machi));
+                    }
+                    GameField.canPut = GameField.MAP_SPRITES[p.y / Config.TILE_SIZE - 1][p.x / Config.TILE_SIZE].equals("024");
                 }
+
             }
         };
 
