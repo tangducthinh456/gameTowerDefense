@@ -14,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -51,13 +52,21 @@ public class Main extends Application
         stage.setTitle("Tower Defense");
         // Them scene vao stage
         stage.setScene(scene);
-        GameField.drawMap(gc);
+
+
+        //GameField.drawMap(gc);
+
+
         //GameField.drawController(gc);
 
         //Image startButton = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png");
-        ImageView button = new ImageView(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png"));
-        button.setX(Config.TILE_SIZE * 21);
-        button.setY(150);
+        ImageView button_m = new ImageView(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png"));
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+        Image img = button_m.snapshot(params, null);
+        ImageView button = new ImageView(img);
+        button.setX(Config.TILE_SIZE * 20);
+        button.setY(250);
 
         Image normalTower = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
         Image nor = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
@@ -90,12 +99,13 @@ public class Main extends Application
         machineGun.setY(Config.TILE_SIZE * 7);
          */
 
-        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png",Config.TILE_SIZE * 20, Config.TILE_SIZE * 5);
-        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png",Config.TILE_SIZE * 22, Config.TILE_SIZE * 5);
-        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png",Config.TILE_SIZE * 21, Config.TILE_SIZE * 7);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png",Config.TILE_SIZE * 20, Config.TILE_SIZE * 7);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png",Config.TILE_SIZE * 22, Config.TILE_SIZE * 7);
+        TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png",Config.TILE_SIZE * 21, Config.TILE_SIZE * 9);
 
 
         root.getChildren().add(button);
+
 
         /*EventHandler<MouseEvent> pickTower = new EventHandler<MouseEvent>() {
             @Override
@@ -116,7 +126,7 @@ public class Main extends Application
                 else if (GameField.onClick == 2) towerType = "SnipperTower";
                 else if (GameField.onClick == 3) towerType = "MachineGunTower";
                 GameField.towerList.add(GameCreate.drawTower(p.x/Config.TILE_SIZE,p.y/Config.TILE_SIZE - 1, towerType));
-                //GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE] = "file:AssetsKit_2/PNG/Default size/towerDefense_tile306.png";
+                GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE] = "306";
                 GameField.onClick = 0;
                 root.setCursor(Cursor.DEFAULT);
             }
@@ -180,7 +190,10 @@ public class Main extends Application
                     GameField.canPut = GameField.MAP_SPRITES[p.y / Config.TILE_SIZE - 1][p.x / Config.TILE_SIZE].equals("024");
                 }
 
+
             }
+
+
         };
 
         timer.start();

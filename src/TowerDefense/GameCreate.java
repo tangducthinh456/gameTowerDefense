@@ -70,6 +70,7 @@ public class GameCreate {
             tower.fireRange = 192;
             tower.damage = 15;
             tower.period = 10;
+            GameField.money -= 70;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
@@ -79,6 +80,7 @@ public class GameCreate {
             tower.damage = 40;
             tower.fireRange = 300;
             tower.period = 20;
+            GameField.money -= 90;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile252.png");
@@ -88,6 +90,7 @@ public class GameCreate {
             tower.fireRange = 130;
             tower.damage = 6;
             tower.period = 3;
+            GameField.money -= 50;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile272.png");

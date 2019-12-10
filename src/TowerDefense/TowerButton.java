@@ -28,12 +28,12 @@ public class TowerButton {
 
         Button button = new Button("", gunButton);
         button.setOnMouseClicked(actionEvent -> {
-            root.setCursor(new ImageCursor(img, Config.TILE_SIZE, Config.TILE_SIZE));
 
             //System.out.println(nor.toString());
-            if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png")) GameField.onClick = 1; //GameField.onClick = 1;
-            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png")) GameField.onClick = 2;
-            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png")) GameField.onClick = 3;
+            if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png") && GameField.money >= 70) GameField.onClick = 1; //GameField.onClick = 1;
+            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png") && GameField.money >= 90) GameField.onClick = 2;
+            else if (sgunImg.equals("file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png") && GameField.money >= 50) GameField.onClick = 3;
+            if (GameField.onClick != 0) root.setCursor(new ImageCursor(img, Config.TILE_SIZE, Config.TILE_SIZE));
         });
         button.setLayoutX(x);
         button.setLayoutY(y);

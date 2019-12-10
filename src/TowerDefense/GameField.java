@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 import Entity.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class GameField
 {
@@ -24,6 +26,7 @@ public class GameField
     public static int currentLEVEL = 0;
     public static int onClick = 0;
     public static boolean canPut = true;
+    public static Integer money = 100;
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024", "236", "236", "236", "236", "236"},
@@ -40,7 +43,7 @@ public class GameField
             { "001", "001", "001", "001", "001", "001", "027", "024", "024", "024", "024", "024", "024", "024", "024", "024", "025", "023", "024", "236", "236", "236", "236", "236"},
     };
 
-    public static final String[][] CONTROLLER_SPRITES = new String[][]
+    /*public static final String[][] CONTROLLER_SPRITES = new String[][]
             {
                     {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"},
@@ -54,7 +57,7 @@ public class GameField
                     {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"},
                     {"236", "236", "236", "236", "236"}
-            };
+            };*/
 
     public static final Point[] wayPoints = new Point[] {
             //new Point(0, 10 * Config.TILE_SIZE + Config.TILE_SIZE / 2),
@@ -78,15 +81,30 @@ public class GameField
                 gc.drawImage(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile" + MAP_SPRITES[i][j] + ".png"), j * Config.TILE_SIZE , i * Config.TILE_SIZE);
             }
         }
+        Integer level = currentLEVEL;
+        Integer health = MYHEALTH;
+        gc.setFill(Color.LIGHTGREEN);
+        gc.setFont(new Font("Arial", 40));
+        gc.fillText("Level :", 19 * Config.TILE_SIZE,40);
+        gc.fillText(level.toString(), 19 * Config.TILE_SIZE + 150,40);
+        gc.fillText("Money :", 19 * Config.TILE_SIZE, 120);
+        gc.fillText(money.toString() + "$", 19 * Config.TILE_SIZE + 150, 120);
+        gc.setFill(Color.LIGHTPINK);
+        gc.fillText("Health :", 19 * Config.TILE_SIZE, 200);
+        gc.fillText(health.toString(), 19 * Config.TILE_SIZE + 150, 200);
+        gc.setFill(Color.ALICEBLUE);
+        gc.fillText("70$", Config.TILE_SIZE * 20 + 10, Config.TILE_SIZE * 8 + 50);
+        gc.fillText("90$", Config.TILE_SIZE * 22 + 10, Config.TILE_SIZE * 8 + 50);
+        gc.fillText("50$", Config.TILE_SIZE * 21 + 10, Config.TILE_SIZE * 10 + 50);
     }
 
-    public static void drawController(GraphicsContext gc) {
+    /*public static void drawController(GraphicsContext gc) {
         for (int i = 0; i < CONTROLLER_SPRITES.length; i++) {
             for (int j = 0; j < CONTROLLER_SPRITES[i].length; j++) {
                 gc.drawImage(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile" + CONTROLLER_SPRITES[i][j] + ".png"), (j + 19) * Config.TILE_SIZE , i * Config.TILE_SIZE);
             }
         }
-    }
+    }*/
 
 
 }
