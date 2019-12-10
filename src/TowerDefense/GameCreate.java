@@ -67,28 +67,28 @@ public class GameCreate {
 
         if (type.equals("NormalTower"))
         {
-            tower.fireRange = 192;
-            tower.damage = 15;
+            tower.fireRange = 250;
+            tower.damage = 100;
             tower.period = 10;
-            GameField.money -= 70;
+            GameField.money -= 80;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile251.png");
         }
         else if (type.equals("SnipperTower"))
         {
-            tower.damage = 40;
-            tower.fireRange = 300;
+            tower.damage = 300;
+            tower.fireRange = 400;
             tower.period = 20;
-            GameField.money -= 90;
+            GameField.money -= 150;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             tower.gunImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile250.png");
             tower.bulletImg = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile252.png");
         }
         else if (type.equals("MachineGunTower"))
         {
-            tower.fireRange = 130;
-            tower.damage = 6;
+            tower.fireRange = 150;
+            tower.damage = 15;
             tower.period = 3;
             GameField.money -= 50;
             tower.img = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");

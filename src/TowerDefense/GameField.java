@@ -93,8 +93,8 @@ public class GameField
         gc.fillText("Health :", 19 * Config.TILE_SIZE, 200);
         gc.fillText(health.toString(), 19 * Config.TILE_SIZE + 150, 200);
         gc.setFill(Color.ALICEBLUE);
-        gc.fillText("70$", Config.TILE_SIZE * 20 + 10, Config.TILE_SIZE * 8 + 50);
-        gc.fillText("90$", Config.TILE_SIZE * 22 + 10, Config.TILE_SIZE * 8 + 50);
+        gc.fillText("80$", Config.TILE_SIZE * 20 + 10, Config.TILE_SIZE * 8 + 50);
+        gc.fillText("150$", Config.TILE_SIZE * 22 + 10, Config.TILE_SIZE * 8 + 50);
         gc.fillText("50$", Config.TILE_SIZE * 21 + 10, Config.TILE_SIZE * 10 + 50);
     }
 

@@ -8,7 +8,7 @@ public abstract class Enemy extends GameEntity {
 
     public double speed;
     public int health;
-    public double reward;
+    public int reward;
     public int damage;
     public int armor;
 

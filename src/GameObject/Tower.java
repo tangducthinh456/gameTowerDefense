@@ -87,10 +87,11 @@ public class Tower extends GameEntity{
                 //System.out.println(enemy.health);
                 if (enemy.health <= 0)
                 {
-                    if(enemy instanceof Boss) GameField.money += 70;
+                    /*if(enemy instanceof Boss) GameField.money += 70;
                     if(enemy instanceof Plane) GameField.money += 40;
                     if(enemy instanceof Tank) GameField.money += 50;
-                    if(enemy instanceof SmallerEnemy) GameField.money += 20;
+                    if(enemy instanceof SmallerEnemy) GameField.money += 20;*/
+                    GameField.money += enemy.reward;
 
                     if (enemyInScope.contains(enemy)) enemyInScope.remove(enemy);
                     GameField.enemyList.remove(enemy);
