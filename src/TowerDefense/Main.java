@@ -115,7 +115,15 @@ public class Main extends Application {
             Image img = button_m.snapshot(params, null);
             ImageView button = new ImageView(img);
             button.setX(Config.TILE_SIZE * 20);
-            button.setY(250);
+            button.setY(230);
+
+            ImageView button2_m = new ImageView(new Image("file:AssetsKit_2/PNG/Default size/pause.png"));
+            SnapshotParameters params2 = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image img2 = button2_m.snapshot(params2, null);
+            ImageView button2 = new ImageView(img2);
+            button2.setX(Config.TILE_SIZE * 20);
+            button2.setY(300);
 
             Image normalTower = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             Image nor = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
@@ -132,7 +140,7 @@ public class Main extends Application {
             TowerButton.addButton(root, "file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png", "file:AssetsKit_2/PNG/Default size/towerDefense_tile249.png",Config.TILE_SIZE * 21, Config.TILE_SIZE * 9);
 
 
-            root.getChildren().add(button);
+            root.getChildren().addAll(button, button2);
 
 
             root.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
@@ -161,7 +169,22 @@ public class Main extends Application {
                 }
             };
 
+            EventHandler<MouseEvent> pauseHandler = new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                    if (!GameField.onPause)
+                    {
+                        GameField.onPause = true;
+                    }
+                    else
+                    {
+                        GameField.onPause = false;
+                    }
+                }
+            };
+
             button.addEventFilter(MouseEvent.MOUSE_CLICKED, startHandler);
+            button2.addEventFilter(MouseEvent.MOUSE_CLICKED, pauseHandler);
 
             stage.show();
 
@@ -189,7 +212,7 @@ public class Main extends Application {
                     }
 
                     render();
-                    update();
+                    if (!GameField.onPause) update();
                     Point p = MouseInfo.getPointerInfo().getLocation();
                     if ((GameField.onClick != 0) && p.x < 19 * Config.TILE_SIZE && p.y < 12 * Config.TILE_SIZE && p.x > Config.TILE_SIZE && p.y > Config.TILE_SIZE && GameField.canPut != GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE].equals("024")) {
                         if (GameField.onClick == 1)

@@ -27,6 +27,7 @@ public class GameField
     public static int onClick = 0;
     public static boolean canPut = true;
     public static Integer money = 100;
+    public static boolean onPause = false;
 
     public static final String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "003", "047", "047", "047", "047", "047", "047", "047", "047", "047", "004", "024", "024", "024", "024", "024", "024", "236", "236", "236", "236", "236"},
