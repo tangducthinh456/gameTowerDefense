@@ -57,63 +57,9 @@ public class Main extends Application {
         GameField.towerList.forEach(g->g.render(gc));
     }
 
-    public void startPlay(Group root, GraphicsContext gc)
+    public void startPlay(Group root, final GraphicsContext gc, Stage stage)
     {
 
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) {
-        // Tao Canvas
-        Canvas canvas = new Canvas(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        gc = canvas.getGraphicsContext2D();
-
-        // Tao root container
-        Group root = new Group();
-        root.getChildren().add(canvas);
-
-        // Tao scene
-        Scene scene = new Scene(root);
-
-        stage.setTitle("Tower Defense");
-        // Them scene vao stage
-
-
-        Image background = new Image("file:AssetsKit_2/PNG/Default size/background.png");
-        gc.drawImage(background, 0, 0);
-        Text newGame = new Text("New Game");
-        newGame.setFont(Font.font("Forte", 100));
-        newGame.setFill(Color.BLACK);
-        newGame.setX(Config.TILE_SIZE * 3);
-        newGame.setY(Config.TILE_SIZE * 3);
-        
-        Text Continue = new Text("Continue");
-        Continue.setFont(Font.font("Forte", 100));
-        Continue.setFill(Color.BLACK);
-        Continue.setX(Config.TILE_SIZE * 3);
-        Continue.setY(Config.TILE_SIZE * 6);
-        
-        Text Exit = new Text("Exit");
-        Exit.setFont(Font.font("Forte", 100));
-        Exit.setFill(Color.BLACK);
-        Exit.setX(Config.TILE_SIZE * 3);
-        Exit.setY(Config.TILE_SIZE * 9);
-
-
-
-        newGame.fillProperty().bind(Bindings.when(newGame.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
-        Continue.fillProperty().bind(Bindings.when(Continue.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
-        Exit.fillProperty().bind(Bindings.when(Exit.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
-
-        root.getChildren().addAll(newGame, Continue, Exit);
-
-        newGame.setOnMouseClicked(actionEvent -> {
-
-            root.getChildren().removeAll(newGame, Continue, Exit);
 
             ImageView button_m = new ImageView(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile300.png"));
             SnapshotParameters params = new SnapshotParameters();
@@ -269,6 +215,62 @@ public class Main extends Application {
             };
 
             timer.start();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        // Tao Canvas
+        Canvas canvas = new Canvas(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        gc = canvas.getGraphicsContext2D();
+
+        // Tao root container
+        Group root = new Group();
+        root.getChildren().add(canvas);
+
+        // Tao scene
+        Scene scene = new Scene(root);
+
+        stage.setTitle("Tower Defense");
+        // Them scene vao stage
+
+
+        Image background = new Image("file:AssetsKit_2/PNG/Default size/background.png");
+        gc.drawImage(background, 0, 0);
+        Text newGame = new Text("New Game");
+        newGame.setFont(Font.font("Forte", 100));
+        newGame.setFill(Color.BLACK);
+        newGame.setX(Config.TILE_SIZE * 3);
+        newGame.setY(Config.TILE_SIZE * 3);
+        
+        Text Continue = new Text("Continue");
+        Continue.setFont(Font.font("Forte", 100));
+        Continue.setFill(Color.BLACK);
+        Continue.setX(Config.TILE_SIZE * 3);
+        Continue.setY(Config.TILE_SIZE * 6);
+        
+        Text Exit = new Text("Exit");
+        Exit.setFont(Font.font("Forte", 100));
+        Exit.setFill(Color.BLACK);
+        Exit.setX(Config.TILE_SIZE * 3);
+        Exit.setY(Config.TILE_SIZE * 9);
+
+
+
+        newGame.fillProperty().bind(Bindings.when(newGame.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
+        Continue.fillProperty().bind(Bindings.when(Continue.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
+        Exit.fillProperty().bind(Bindings.when(Exit.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
+
+        root.getChildren().addAll(newGame, Continue, Exit);
+
+        newGame.setOnMouseClicked(actionEvent -> {
+
+            root.getChildren().removeAll(newGame, Continue, Exit);
+
+            startPlay(root, gc, stage);
         });
 
 
@@ -277,6 +279,9 @@ public class Main extends Application {
                 });
 
         Continue.setOnMouseClicked(actionEvent -> {
+
+            root.getChildren().removeAll(newGame, Continue, Exit);
+
             List<Integer> list = new ArrayList<Integer>();
             File file = new File("continue.txt");
             BufferedReader reader = null;
@@ -303,16 +308,26 @@ public class Main extends Application {
                 } catch (IOException e) {
                 }
             }
+
             for (int m = 0; m < list.size(); m++)
             {
-                String type = "";
+                if (list.get(m) == 1 || list.get(m) == 2|| list.get(m) == 3)
+                {
+                    String type = "";
 
-                if (list.get(m) == 1) type = "MachineGunTower";
-                if (list.get(m) == 2) type = "NormalTower";
-                if (list.get(m) == 1) type = "SnipperTower";
+                    if (list.get(m) == 1) type = "MachineGunTower";
+                    if (list.get(m) == 2) type = "NormalTower";
+                    if (list.get(m) == 3) type = "SnipperTower";
 
-                GameField.towerList.add(GameCreate.drawTower( (list.size() - 3) % 19, (list.size() - 2) / 19, type));
+                    GameField.towerList.add(GameCreate.drawTower( (m - 2) % 19 - 1, (m - 2) / 19, type));
+                }
             }
+
+            GameField.currentLEVEL = list.get(0);
+            GameField.money = list.get(1);
+            GameField.MYHEALTH = list.get(2);
+
+            startPlay(root, gc, stage);
         });
 
         stage.setScene(scene);
