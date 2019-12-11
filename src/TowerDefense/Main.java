@@ -26,6 +26,7 @@ import java.awt.*;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
 
@@ -96,6 +97,8 @@ public class Main extends Application {
         Exit.setX(Config.TILE_SIZE * 3);
         Exit.setY(Config.TILE_SIZE * 9);
 
+
+
         newGame.fillProperty().bind(Bindings.when(newGame.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
         Continue.fillProperty().bind(Bindings.when(Continue.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
         Exit.fillProperty().bind(Bindings.when(Exit.hoverProperty()).then(Color.RED).otherwise(Color.BLACK));
@@ -162,15 +165,27 @@ public class Main extends Application {
 
             stage.show();
 
+
+
             AnimationTimer timer = new AnimationTimer() {
 
                 @Override
                 public void handle(long now)
                 {
 
+
                     if (GameField.MYHEALTH <= 0)
                     {
-                        return;
+                        gc.setFill(Color.RED);
+                        gc.setFont(Font.font("Forte", 150));
+                        gc.fillText("Game Over!", Config.TILE_SIZE * 8, Config.TILE_SIZE * 4);
+                        try {
+                            TimeUnit.SECONDS.sleep(5);
+                            //break outer;
+                            stage.close();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     render();
