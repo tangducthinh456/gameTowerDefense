@@ -3,6 +3,7 @@ package TowerDefense;
 import GameObject.*;
 import Entity.*;
 
+import java.io.*;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
@@ -40,7 +41,7 @@ public class Main extends Application {
         if (GameField.timeCount % 10 == 0 && GameField.timeCount < 10 * GameField.enemyListInQueue.size() - 10 + 1)
         {
             GameField.enemyList.add(GameField.enemyListInQueue.get(i));
-            System.out.println(i);
+            //System.out.println(i);
             i++;
         }
 
@@ -52,8 +53,13 @@ public class Main extends Application {
     public void render()
     {
         GameField.drawMap(gc);
-        GameField.enemyList.forEach(g -> g.render(gc));
+        GameField.enemyList.forEach(g->g.render(gc));
         GameField.towerList.forEach(g->g.render(gc));
+    }
+
+    public void startPlay(Group root, GraphicsContext gc)
+    {
+
     }
 
     public static void main(String[] args) {
@@ -125,6 +131,12 @@ public class Main extends Application {
             button2.setX(Config.TILE_SIZE * 20);
             button2.setY(300);
 
+            Text quit = new Text("Quit");
+            quit.setFill(Color.RED);
+            quit.setFont(Font.font("Forte", 70));
+            quit.setX(Config.TILE_SIZE * 20);
+            quit.setY(Config.TILE_SIZE * 11 + 50);
+
             Image normalTower = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile181.png");
             Image nor = new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile206.png");
 
@@ -151,6 +163,8 @@ public class Main extends Application {
                     else if (GameField.onClick == 2) towerType = "SnipperTower";
                     else if (GameField.onClick == 3) towerType = "MachineGunTower";
                     GameField.towerList.add(GameCreate.drawTower(p.x/Config.TILE_SIZE,p.y/Config.TILE_SIZE - 1, towerType));
+                    System.out.println(p.x/Config.TILE_SIZE);
+                    System.out.println(p.y/Config.TILE_SIZE - 1);
                     GameField.MAP_SPRITES[p.y/Config.TILE_SIZE - 1][p.x/Config.TILE_SIZE] = "306";
                     GameField.onClick = 0;
                     root.setCursor(Cursor.DEFAULT);
@@ -168,6 +182,18 @@ public class Main extends Application {
                     i = 0;
                 }
             };
+
+            quit.addEventHandler(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+
+                try {
+                    GameField.writeContinue();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage.close();
+            });
+
+            root.getChildren().add(quit);
 
             EventHandler<MouseEvent> pauseHandler = new EventHandler<MouseEvent>() {
                 @Override
@@ -202,9 +228,19 @@ public class Main extends Application {
                         gc.setFill(Color.RED);
                         gc.setFont(Font.font("Forte", 150));
                         gc.fillText("Game Over!", Config.TILE_SIZE * 8, Config.TILE_SIZE * 4);
+
+                        try
+                        {
+                            GameField.writeContinue();
+                        } catch (FileNotFoundException e)
+                        {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         try {
                             TimeUnit.SECONDS.sleep(5);
-                            //break outer;
                             stage.close();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -239,6 +275,45 @@ public class Main extends Application {
         Exit.setOnMouseClicked(actionEvent -> {
         stage.close();
                 });
+
+        Continue.setOnMouseClicked(actionEvent -> {
+            List<Integer> list = new ArrayList<Integer>();
+            File file = new File("continue.txt");
+            BufferedReader reader = null;
+
+            try {
+                reader = new BufferedReader(new FileReader(file));
+                String text = null;
+
+                while ((text = reader.readLine()) != null) {
+                    for (String num : text.split(" "))
+                    {
+                        list.add(Integer.parseInt(num));
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                }
+            }
+            for (int m = 0; m < list.size(); m++)
+            {
+                String type = "";
+
+                if (list.get(m) == 1) type = "MachineGunTower";
+                if (list.get(m) == 2) type = "NormalTower";
+                if (list.get(m) == 1) type = "SnipperTower";
+
+                GameField.towerList.add(GameCreate.drawTower( (list.size() - 3) % 19, (list.size() - 2) / 19, type));
+            }
+        });
 
         stage.setScene(scene);
 

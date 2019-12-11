@@ -5,6 +5,9 @@ import GameObject.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import Entity.*;
@@ -99,13 +102,42 @@ public class GameField
         gc.fillText("50$", Config.TILE_SIZE * 21 + 10, Config.TILE_SIZE * 10 + 50);
     }
 
-    /*public static void drawController(GraphicsContext gc) {
-        for (int i = 0; i < CONTROLLER_SPRITES.length; i++) {
-            for (int j = 0; j < CONTROLLER_SPRITES[i].length; j++) {
-                gc.drawImage(new Image("file:AssetsKit_2/PNG/Default size/towerDefense_tile" + CONTROLLER_SPRITES[i][j] + ".png"), (j + 19) * Config.TILE_SIZE , i * Config.TILE_SIZE);
+    public static void writeContinue() throws IOException {
+        FileOutputStream out = new FileOutputStream("continue.txt");
+        Integer level = currentLEVEL - 1;
+        Integer Money = money;
+        Integer myhealth = MYHEALTH;
+        out.write(level.toString().getBytes());
+        out.write("\n".getBytes());
+        out.write(Money.toString().getBytes());
+        out.write("\n".getBytes());
+        out.write(myhealth.toString().getBytes());
+        out.write("\n".getBytes());
+        boolean check = false;
+        for (int m = 0; m < 12; m++)
+        {
+            for (int n = 0; n < 19; n++)
+            {
+                for (Tower t : towerList)
+                {
+                    if (t.i == n && t.j == m)
+                    {
+                        check = true;
+                        if (t.period == 3) out.write("1 ".getBytes());
+                        if (t.period == 10) out.write("2 ".getBytes());
+                        if (t.period == 20) out.write("3 ".getBytes());
+                        break;
+                    }
+                }
+                if (!check)
+                {
+                    out.write("0 ".getBytes());
+                    //check = false;
+                }
+                else check = false;
             }
+            out.write("\n".getBytes());
         }
-    }*/
-
-
+        out.close();
+    }
 }

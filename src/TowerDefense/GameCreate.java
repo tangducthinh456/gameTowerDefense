@@ -61,6 +61,8 @@ public class GameCreate {
     public static Tower drawTower(int m, int n, String type)
     {
         Tower tower = new Tower();
+        tower.i = m;
+        tower.j = n;
         tower.x = m * Config.TILE_SIZE;
         tower.y = n * Config.TILE_SIZE;
         tower.setDirection(0);
